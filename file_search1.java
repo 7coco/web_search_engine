@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-class file_search1
+class fileSearch1
 {
 	public static void main(String[] args) {
 		if(args.length != 2){
