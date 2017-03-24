@@ -35,7 +35,7 @@ class file_search1
 			if(str.matches(".*" + query + ".*")) results.add(lineNumber);
 			lineNumber++;
 		}
-		
+		br.close();
 		return results;
   	}
 }
