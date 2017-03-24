@@ -32,7 +32,8 @@ class file_search1
 		String str;
 		int lineNumber = 1;
 		while((str = br.readLine()) != null){
-			if(str == query) results.add(lineNumber);
+			if(str.matches(".*" + query + ".*")) results.add(lineNumber);
+			lineNumber++;
 		}
 		
 		return results;
