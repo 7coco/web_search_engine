@@ -28,14 +28,19 @@ public class FileSearch1
 	public static ArrayList<Integer> search(String query, String fileName) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 
-		ArrayList<Integer> results = new ArrayList<Integer>();
+		// try catchをして欲しい、
+		// ArrayListを宣言するときはListから new して宣言する。
+		String result = "";
 		String str;
 		int lineNumber = 1;
 		while((str = br.readLine()) != null){
-			if(str.matches(".*" + query + ".*")) results.add(lineNumber);
-			lineNumber++;
+			result += lineNumber + "行目の"; //こんな感じのやつをindexOfが-1じゃないときだけ一回だけやる。
+			while(str.indexOf(query) != -1){
+				// indexを結果に入れる
+				// strの頭を切る。
+			}
 		}
-		br.close();
-		return results;
+		br.close(); //これは必ずfinallyでやる。
+		return result;
   	}
 }
