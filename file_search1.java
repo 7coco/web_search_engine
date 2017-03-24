@@ -13,12 +13,12 @@ class file_search1
 		try {
 			ArrayList<Integer> numOfLines = search(args[0], args[1]);
 			if(numOfLines.size() > 0){
-				System.out.println("該当する行はありませんでした。");
-			}else{
 				System.out.println("入力された文字列が現れた行番号は以下の通りです。");
 				numOfLines.forEach(num -> {
-					System.out.print(num + " ");
+					System.out.println(num);
 				});
+			}else{
+				System.out.println("該当する行はありませんでした。");
 			}
 		} catch (IOException e) {
 			System.out.println("入出力エラーです。");
