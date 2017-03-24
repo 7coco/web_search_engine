@@ -15,15 +15,16 @@ class file_search1
 		System.out.println(/* 検索結果 */);
 	}
 
-  public void search(String query, String fileName) throws IOException{
-	  BufferedReader br = new BufferedReader(new FileReader(fileName));
+	public static ArrayList<Integer> search(String query, String fileName) throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
 
-	  int lineCount = 0;
-	  while((br.readLine()) != null){
-		  lineCount++;
-	  }
-
-	  int[] results = new int[lineCount];
-
+		ArrayList<Integer> results = new ArrayList<Integer>();
+		String str;
+		int lineNumber = 1;
+		while((str = br.readLine()) != null){
+			if(str == query) results.add(lineNumber);
+		}
+		
+		return results;
   	}
 }
