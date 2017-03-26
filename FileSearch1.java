@@ -28,19 +28,26 @@ public class FileSearch1
 		String result = "";
 		String str;
 		int lineNumber = 1;
-		while((str = br.readLine()) != null){
-			if (str.indexOf(query) != -1){
-				result += "\n";
-			 	result += lineNumber + "行目の";
-				int charNumber;
-				while((charNumber = str.indexOf(query)) != -1){
-					result += (charNumber + 1) + "文字目 ";
-					str = str.substring(charNumber + query.length());
+		try{
+			while((str = br.readLine()) != null){
+				if (str.indexOf(query) != -1){
+					result += "\n";
+				 	result += lineNumber + "行目の";
+					int charNumber = 0;
+					while(str.indexOf(query) != -1){
+						charNumber += str.indexOf(query);
+						result += (charNumber + 1) + "文字目 ";
+						str = str.substring(str.indexOf(query) + query.length());
+						charNumber += query.length();
+						System.out.println(str);
+						System.out.println(charNumber);
+					}
 				}
+				lineNumber++;
 			}
-			lineNumber++;
+		}finally{
+			br.close();
 		}
-		br.close(); //これは必ずfinallyでやる。
 		return result;
   	}
 }
