@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class FileSearch1
 {
@@ -25,7 +24,7 @@ public class FileSearch1
 		}
 	}
 
-	public static ArrayList<Integer> search(String query, String fileName) throws IOException{
+	public static String search(String query, String fileName) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 
 		// try catchをして欲しい、
