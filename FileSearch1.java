@@ -25,8 +25,6 @@ public class FileSearch1
 	public static String search(String query, String fileName) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 
-		// try catchをして欲しい、
-		// ArrayListを宣言するときはListから new して宣言する。
 		String result = "";
 		String str;
 		int lineNumber = 1;
