@@ -33,11 +33,16 @@ public class FileSearch1
 		String str;
 		int lineNumber = 1;
 		while((str = br.readLine()) != null){
-			result += lineNumber + "行目の"; //こんな感じのやつをindexOfが-1じゃないときだけ一回だけやる。
-			while(str.indexOf(query) != -1){
-				// indexを結果に入れる
-				// strの頭を切る。
+			if (str.indexOf(query) != -1){
+				result += "\n";
+			 	result += lineNumber + "行目の";
+				int charNumber;
+				while((charNumber = str.indexOf(query)) != -1){
+					result += (charNumber + 1) + "文字目 ";
+					str = str.substring(charNumber + query.length());
+				}
 			}
+			lineNumber++;
 		}
 		br.close(); //これは必ずfinallyでやる。
 		return result;
