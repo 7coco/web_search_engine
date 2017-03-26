@@ -10,12 +10,10 @@ public class FileSearch1
 		}
 
 		try {
-			ArrayList<Integer> numOfLines = search(args[0], args[1]);
-			if(numOfLines.size() > 0){
+			String result = search(args[0], args[1]);
+			if(result.length() > 0){
 				System.out.println("入力された文字列が現れた行番号は以下の通りです。");
-				numOfLines.forEach(num -> {
-					System.out.println(num);
-				});
+				System.out.println(result);
 			}else{
 				System.out.println("該当する行はありませんでした。");
 			}
