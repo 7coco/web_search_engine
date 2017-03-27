@@ -94,16 +94,21 @@ public class FileSearch2 {
 	 *            検索結果のマップ
 	 * @return 出力するべき文字列
 	 */
-	private static String createOutputStr(Map<Integer, List<Integer>> resultMap) {
+	private static String createOutputStr(Map<String, Map<Integer, List<Integer>>> resultMap) {
 		StringBuilder answer = new StringBuilder();
-		for (Map.Entry<Integer, List<Integer>> entry : resultMap.entrySet()) {
-			int line = entry.getKey();
-			List<Integer> chars = entry.getValue();
-			answer.append(line).append("行目 ");
-			for (Integer c : chars) {
-				answer.append(c).append("文字目 ");
+		for (Map.Entry<String, Map<Integer, List<Integer>>> entry : resultMap.entrySet()) {
+			String fileName = entry.getKey();
+			answer.append(fileName).append('の');
+			Map<Integer, List<Integer>> lineAndCharNumbers = entry.getValue();
+			for (Map.Entry<Integer, List<Integer>> etr : lineAndCharNumbers.entrySet()) {
+				int line = etr.getKey();
+				List<Integer> chars = etr.getValue();
+				answer.append(line).append("行目 ");
+				for (Integer c : chars) {
+					answer.append(c).append("文字目 ");
+				}
+				answer.append("\n");
 			}
-			answer.append("\n");
 		}
 		return answer.toString();
 	}
