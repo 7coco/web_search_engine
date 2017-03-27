@@ -35,7 +35,6 @@ public class FileSearch1
 					while(str.indexOf(query, charNumber) != -1){
 						charNumber = str.indexOf(query, charNumber) + 1;
 						result += charNumber + "文字目 ";
-						charNumber++;
 					}
 				}
 				lineNumber++;
