@@ -20,7 +20,7 @@ public class FileSearch1 {
 				System.out.println("該当する行はありませんでした。");
 			} else {
 				System.out.println("入力された文字列が現れた行番号は以下の通りです。");
-				String answer = createAnswer(result);
+				String answer = createOutputStr(result);
 				System.out.print(answer);
 			}
 		} catch (IOException e) {
@@ -61,7 +61,7 @@ public class FileSearch1 {
 		}
 	}
 
-	private static String createAnswer(Map<Integer, List<Integer>> resultMap) {
+	private static String createOutputStr(Map<Integer, List<Integer>> resultMap) {
 		String answer = "";
 		for (Map.Entry<Integer, List<Integer>> entry : resultMap.entrySet()) {
 			int line = entry.getKey();
