@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class FileSearch2 {
 	public static void main(String[] args) {
-		if (args.length != 2) {
+		if (args.length < 2) {
 			System.out.println("検索したい文字列と検索対象テキストファイル名を空白区切で入力してください.");
-			System.out.println("例）hoge test.txt");
+			System.out.println("例）hoge test.txt test2.txt");
 			System.exit(1);
 		}
 
