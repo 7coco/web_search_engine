@@ -27,20 +27,20 @@ public class FileSearch1 {
 		}
 	}
 
-	public static String search(String query, String fileName) throws IOException{
-		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
-			String result = "";
+	public static Map<Integer, List<Integer>> search(String query, String fileName) throws IOException {
+		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+			Map<Integer, List<Integer>> result = new HashMap<Integer, List<Integer>>();
 			String str;
 			int lineNumber = 1;
-			while((str = br.readLine()) != null){
-				if (str.indexOf(query) != -1){
-					result += "\n";
-				 	result += lineNumber + "行目の";
+			while ((str = br.readLine()) != null) {
+				if (str.indexOf(query) != -1) {
+					List<Integer> charNumbers = new ArrayList<Integer>();
 					int charNumber = 0;
 					while (str.indexOf(query, charNumber) != -1) {
 						charNumber = str.indexOf(query, charNumber) + 1;
-						result += charNumber + "文字目 ";
+						charNumbers.add(charNumber);
 					}
+					result.put(lineNumber, charNumbers);
 				}
 				lineNumber++;
 			}
