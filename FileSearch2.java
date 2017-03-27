@@ -14,6 +14,7 @@ public class FileSearch2 {
 			System.exit(1);
 		}
 
+		List<String> fileNames = createFileNamesList(args);
 		try {
 			Map<Integer, List<Integer>> result = search(args[0], args[1]);
 			if (result.isEmpty()) {
@@ -27,6 +28,23 @@ public class FileSearch2 {
 			System.out.println("入出力エラーです。");
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * コマンドライン引数を引数で渡すと第二引数以降のリストを返します。
+	 * 
+	 * @param commandLineArgs
+	 * @return fileNames
+	 */
+	private static List<String> createFileNamesList(String[] commandLineArgs) {
+		List<String> fileNames = new ArrayList<String>();
+		for (int i = 0; i < commandLineArgs.length; i++) {
+			if (i == 0) {
+				continue;
+			}
+			fileNames.add(commandLineArgs[i]);
+		}
+		return fileNames;
 	}
 
 	/**
