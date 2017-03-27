@@ -16,7 +16,9 @@ public class FileSearch1 {
 
 		try {
 			Map<Integer, List<Integer>> result = search(args[0], args[1]);
-			if (result.size() > 0) {
+			if (result.isEmpty()) {
+				System.out.println("該当する行はありませんでした。");
+			} else {
 				System.out.println("入力された文字列が現れた行番号は以下の通りです。");
 				result.forEach((line, chars) -> {
 					String answer;
@@ -26,8 +28,6 @@ public class FileSearch1 {
 					}
 					System.out.println(answer);
 				});
-			} else {
-				System.out.println("該当する行はありませんでした。");
 			}
 		} catch (IOException e) {
 			System.out.println("入出力エラーです。");
