@@ -41,15 +41,16 @@ public class FileSearch1 {
 			String str;
 			int lineNumber = 1;
 			while ((str = br.readLine()) != null) {
-				if (str.indexOf(query) != -1) {
-					List<Integer> charNumbers = new ArrayList<Integer>();
-					int charNumber = 0;
-					while (str.indexOf(query, charNumber) != -1) {
-						charNumber = str.indexOf(query, charNumber) + 1;
-						charNumbers.add(charNumber);
-					}
-					result.put(lineNumber, charNumbers);
+				if (str.indexOf(query) == -1) {
+					continue;
 				}
+				List<Integer> charNumbers = new ArrayList<Integer>();
+				int charNumber = 0;
+				while ((charNumber = str.indexOf(query, charNumber)) != -1) {
+					charNumber++;
+					charNumbers.add(charNumber);
+				}
+				result.put(lineNumber, charNumbers);
 				lineNumber++;
 			}
 			return result;
