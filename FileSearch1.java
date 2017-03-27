@@ -15,11 +15,18 @@ public class FileSearch1 {
 		}
 
 		try {
-			String result = search(args[0], args[1]);
-			if(result.length() > 0){
+			Map<Integer, List<Integer>> result = search(args[0], args[1]);
+			if (result.size() > 0) {
 				System.out.println("入力された文字列が現れた行番号は以下の通りです。");
-				System.out.println(result);
-			}else{
+				result.forEach((line, chars) -> {
+					String answer;
+					answer = line + "行目";
+					for (Integer c : chars) {
+						answer += c + "文字目 ";
+					}
+					System.out.println(answer);
+				});
+			} else {
 				System.out.println("該当する行はありませんでした。");
 			}
 		} catch (IOException e) {
