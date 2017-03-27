@@ -32,10 +32,9 @@ public class FileSearch1
 					result += "\n";
 				 	result += lineNumber + "行目の";
 					int charNumber = 0;
-					while(str.indexOf(query) != -1){
-						charNumber += str.indexOf(query);
+					while(str.indexOf(query, charNumber) != -1){
+						charNumber = str.indexOf(query, charNumber);
 						result += (charNumber + 1) + "文字目 ";
-						str = str.substring(str.indexOf(query) + query.length());
 						charNumber += query.length();
 					}
 				}
