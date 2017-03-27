@@ -20,7 +20,8 @@ public class FileSearch1 {
 				System.out.println("該当する行はありませんでした。");
 			} else {
 				System.out.println("入力された文字列が現れた行番号は以下の通りです。");
-				answer(result);
+				String answer = createAnswer(result);
+				System.out.print(answer);
 			}
 		} catch (IOException e) {
 			System.out.println("入出力エラーです。");
@@ -50,14 +51,17 @@ public class FileSearch1 {
 		}
 	}
 
-	public static void answer(Map<Integer, List<Integer>> map) {
-		map.forEach((line, chars) -> {
-			String answer;
-			answer = line + "行目";
+	public static String createAnswer(Map<Integer, List<Integer>> resultMap) {
+		String answer = "";
+		for (Map.Entry<Integer, List<Integer>> entry : resultMap.entrySet()) {
+			int line = entry.getKey();
+			List<Integer> chars = entry.getValue();
+			answer += line + "行目 ";
 			for (Integer c : chars) {
 				answer += c + "文字目 ";
 			}
-			System.out.println(answer);
-		});
+			answer += "\n";
+		}
+		return answer;
 	}
 }
