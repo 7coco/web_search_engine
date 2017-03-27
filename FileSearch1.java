@@ -33,9 +33,9 @@ public class FileSearch1
 				 	result += lineNumber + "行目の";
 					int charNumber = 0;
 					while(str.indexOf(query, charNumber) != -1){
-						charNumber = str.indexOf(query, charNumber);
-						result += (charNumber + 1) + "文字目 ";
-						charNumber += query.length();
+						charNumber = str.indexOf(query, charNumber) + 1;
+						result += charNumber + "文字目 ";
+						charNumber++;
 					}
 				}
 				lineNumber++;
