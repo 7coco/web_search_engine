@@ -69,16 +69,16 @@ public class FileSearch1 {
 	 * @return 出力するべき文字列
 	 */
 	private static String createOutputStr(Map<Integer, List<Integer>> resultMap) {
-		String answer = "";
+		StringBuilder answer = new StringBuilder();
 		for (Map.Entry<Integer, List<Integer>> entry : resultMap.entrySet()) {
 			int line = entry.getKey();
 			List<Integer> chars = entry.getValue();
-			answer += line + "行目 ";
+			answer.append(line).append("行目 ");
 			for (Integer c : chars) {
-				answer += c + "文字目 ";
+				answer.append(c).append("文字目 ");
 			}
-			answer += "\n";
+			answer.append("\n");
 		}
-		return answer;
+		return answer.toString();
 	}
 }
