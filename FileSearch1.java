@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +29,7 @@ public class FileSearch1 {
 
 	public static Map<Integer, List<Integer>> search(String query, String fileName) throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-			Map<Integer, List<Integer>> result = new HashMap<Integer, List<Integer>>();
+			Map<Integer, List<Integer>> result = new LinkedHashMap<Integer, List<Integer>>();
 			String str;
 			int lineNumber = 1;
 			while ((str = br.readLine()) != null) {
