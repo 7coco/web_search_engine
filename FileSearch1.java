@@ -29,6 +29,16 @@ public class FileSearch1 {
 		}
 	}
 
+	/**
+	 * 指定されたファイルから指定された文字列の位置を検索します。
+	 * 
+	 * @param query
+	 *            検索文字列
+	 * @param fileName
+	 *            検索対象のファイル名
+	 * @return 検索結果。キー：行数、値：文字の位置リスト
+	 * @throws IOException
+	 */
 	private static Map<Integer, List<Integer>> search(String query, String fileName) throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 			Map<Integer, List<Integer>> result = new LinkedHashMap<Integer, List<Integer>>();
