@@ -39,8 +39,6 @@ public class FileSearch1
 						result += (charNumber + 1) + "文字目 ";
 						str = str.substring(str.indexOf(query) + query.length());
 						charNumber += query.length();
-						System.out.println(str);
-						System.out.println(charNumber);
 					}
 				}
 				lineNumber++;
