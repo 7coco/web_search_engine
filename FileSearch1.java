@@ -29,7 +29,7 @@ public class FileSearch1 {
 		}
 	}
 
-	public static Map<Integer, List<Integer>> search(String query, String fileName) throws IOException {
+	private static Map<Integer, List<Integer>> search(String query, String fileName) throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 			Map<Integer, List<Integer>> result = new LinkedHashMap<Integer, List<Integer>>();
 			String str;
@@ -51,7 +51,7 @@ public class FileSearch1 {
 		}
 	}
 
-	public static String createAnswer(Map<Integer, List<Integer>> resultMap) {
+	private static String createAnswer(Map<Integer, List<Integer>> resultMap) {
 		String answer = "";
 		for (Map.Entry<Integer, List<Integer>> entry : resultMap.entrySet()) {
 			int line = entry.getKey();
