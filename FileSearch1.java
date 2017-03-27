@@ -31,6 +31,7 @@ public class FileSearch1 {
 			}
 		} catch (IOException e) {
 			System.out.println("入出力エラーです。");
+			e.printStackTrace();
 		}
 	}
 
