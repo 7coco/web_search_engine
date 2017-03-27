@@ -16,7 +16,7 @@ public class FileSearch2 {
 
 		List<String> fileNames = createFileNamesList(args);
 		try {
-			Map<Integer, List<Integer>> result = search(args[0], args[1]);
+			Map<String, Map<Integer, List<Integer>>> result = search(args[0], fileNames);
 			if (result.isEmpty()) {
 				System.out.println("該当する行はありませんでした。");
 			} else {
@@ -57,26 +57,34 @@ public class FileSearch2 {
 	 * @return 検索結果。キー：行数、値：文字の位置リスト
 	 * @throws IOException
 	 */
-	private static Map<Integer, List<Integer>> search(String query, String fileName) throws IOException {
-		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-			Map<Integer, List<Integer>> result = new LinkedHashMap<Integer, List<Integer>>();
-			String str;
-			int lineNumber = 1;
-			while ((str = br.readLine()) != null) {
-				if (str.indexOf(query) == -1) {
-					continue;
+	private static Map<String, Map<Integer, List<Integer>>> search(String query, List<String> fileNames)
+			throws IOException {
+		Map<String, Map<Integer, List<Integer>>> result = new LinkedHashMap<String, Map<Integer, List<Integer>>>();
+		for (String fileName : fileNames) {
+			try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+				Map<Integer, List<Integer>> lineAndCharNumbers = new LinkedHashMap<Integer, List<Integer>>();
+				String str;
+				int lineNumber = 1;
+				while ((str = br.readLine()) != null) {
+					if (str.indexOf(query) == -1) {
+						lineNumber++;
+						continue;
+					}
+					List<Integer> charNumbers = new ArrayList<Integer>();
+					int charNumber = 0;
+					while ((charNumber = str.indexOf(query, charNumber)) != -1) {
+						charNumber++;
+						charNumbers.add(charNumber);
+					}
+					lineAndCharNumbers.put(lineNumber, charNumbers);
+					lineNumber++;
 				}
-				List<Integer> charNumbers = new ArrayList<Integer>();
-				int charNumber = 0;
-				while ((charNumber = str.indexOf(query, charNumber)) != -1) {
-					charNumber++;
-					charNumbers.add(charNumber);
+				if (!lineAndCharNumbers.isEmpty()) { // そのファイルの検索結果があれば
+					result.put(fileName, lineAndCharNumbers);
 				}
-				result.put(lineNumber, charNumbers);
-				lineNumber++;
 			}
-			return result;
 		}
+		return result;
 	}
 
 	/**
