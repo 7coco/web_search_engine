@@ -61,6 +61,13 @@ public class FileSearch1 {
 		}
 	}
 
+	/**
+	 * 引数のマップから最終的に出力する文字列を作ってそれを返します。
+	 * 
+	 * @param resultMap
+	 *            検索結果のマップ
+	 * @return 出力するべき文字列
+	 */
 	private static String createOutputStr(Map<Integer, List<Integer>> resultMap) {
 		String answer = "";
 		for (Map.Entry<Integer, List<Integer>> entry : resultMap.entrySet()) {
