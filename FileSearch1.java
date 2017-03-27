@@ -23,12 +23,10 @@ public class FileSearch1
 	}
 
 	public static String search(String query, String fileName) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(fileName));
-
-		String result = "";
-		String str;
-		int lineNumber = 1;
-		try{
+		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
+			String result = "";
+			String str;
+			int lineNumber = 1;
 			while((str = br.readLine()) != null){
 				if (str.indexOf(query) != -1){
 					result += "\n";
@@ -43,9 +41,7 @@ public class FileSearch1
 				}
 				lineNumber++;
 			}
-		}finally{
-			br.close();
+			return result;
 		}
-		return result;
   	}
 }
