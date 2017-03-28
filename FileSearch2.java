@@ -57,7 +57,7 @@ public class FileSearch2 {
 	 * @return 検索結果。キー：行数、値：文字の位置リスト
 	 * @throws IOException
 	 */
-	private static Map<Integer, List<Integer>> search(String query, String fileName) throws IOException {
+	private static Map<Integer, List<Integer>> searchInFile(String query, String fileName) throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 			Map<Integer, List<Integer>> result = new LinkedHashMap<Integer, List<Integer>>();
 			String str;
