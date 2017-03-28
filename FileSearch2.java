@@ -100,6 +100,13 @@ public class FileSearch2 {
 		}
 	}
 
+	/**
+	 * 検索結果のマップから最終的に出力する文字列を作ってそれを返します。
+	 * 
+	 * @param searchResultMap
+	 *            検索結果のマップ
+	 * @return 最終的に出力するべき文字列
+	 */
 	private static String createOutputStr(Map<String, Map<Integer, List<Integer>>> searchResultMap) {
 		StringBuilder output = new StringBuilder();
 		for (Map.Entry<String, Map<Integer, List<Integer>>> entry : searchResultMap.entrySet()) {
