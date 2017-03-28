@@ -19,9 +19,7 @@ public class FileSearcher3 {
 	 * 指定されたファイルから指定された文字列の位置を検索します。
 	 * 
 	 * @param regexp
-	 *            検索文字列
-	 * @param fileName
-	 *            検索対象のファイル名
+	 *            検索パターン
 	 * @return 検索結果。キー：行数、値：文字の位置リスト
 	 * @throws IOException
 	 */
