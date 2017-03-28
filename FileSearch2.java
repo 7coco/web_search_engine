@@ -39,9 +39,6 @@ public class FileSearch2 {
 	private static List<String> createFileNamesList(String[] commandLineArgs) {
 		List<String> fileNames = new ArrayList<String>();
 		for (int i = 0; i < commandLineArgs.length; i++) {
-			if (i == 0) {
-				continue;
-			}
 			fileNames.add(commandLineArgs[i]);
 		}
 		return fileNames;
