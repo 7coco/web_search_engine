@@ -107,9 +107,9 @@ public class FileSearch2 {
 	 *            検索結果のマップ
 	 * @return 出力するべき文字列
 	 */
-	private static String createOutputStr(Map<Integer, List<Integer>> resultMap) {
+	private static String createStrBy(Map<Integer, List<Integer>> lineAndCharNumberMap) {
 		StringBuilder answer = new StringBuilder();
-		for (Map.Entry<Integer, List<Integer>> entry : resultMap.entrySet()) {
+		for (Map.Entry<Integer, List<Integer>> entry : lineAndCharNumberMap.entrySet()) {
 			int line = entry.getKey();
 			List<Integer> chars = entry.getValue();
 			answer.append(line).append("行目 ");
