@@ -84,6 +84,7 @@ public class FileSearch2 {
 			int lineNumber = 1;
 			while ((str = br.readLine()) != null) {
 				if (str.indexOf(query) == -1) {
+					lineNumber++;
 					continue;
 				}
 				List<Integer> charNumbers = new ArrayList<Integer>();
