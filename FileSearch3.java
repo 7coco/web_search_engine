@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class FileSearch3 {
 	public static void main(String[] args) {
@@ -13,8 +14,9 @@ public class FileSearch3 {
 		String[] fileNames = Arrays.copyOfRange(args, 1, args.length);
 		for (String fileName : fileNames) {
 			try {
-				FileSearcher fs = new FileSearcher(fileName);
-				Map<Integer, List<Integer>> result = fs.search(args[0]);
+				FileSearcher3 fs = new FileSearcher3(fileName);
+				Pattern regxp = Pattern.compile(args[0]);
+				Map<Integer, List<Integer>> result = fs.search(regxp);
 				System.out.println("ファイル名：" + fileName);
 				if (result.isEmpty()) {
 					System.out.println("該当する行はありませんでした。");
