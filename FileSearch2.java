@@ -108,16 +108,16 @@ public class FileSearch2 {
 	 * @return 出力するべき文字列
 	 */
 	private static String createStrBy(Map<Integer, List<Integer>> lineAndCharNumberMap) {
-		StringBuilder answer = new StringBuilder();
+		StringBuilder str = new StringBuilder();
 		for (Map.Entry<Integer, List<Integer>> entry : lineAndCharNumberMap.entrySet()) {
 			int line = entry.getKey();
 			List<Integer> chars = entry.getValue();
-			answer.append(line).append("行目 ");
+			str.append(line).append("行目 ");
 			for (Integer c : chars) {
-				answer.append(c).append("文字目 ");
+				str.append(c).append("文字目 ");
 			}
-			answer.append("\n");
+			str.append("\n");
 		}
-		return answer.toString();
+		return str.toString();
 	}
 }
