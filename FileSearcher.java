@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FileSearcher {
-	private static String fileName;
+	private String fileName;
 
 	public FileSearcher() {
 		System.out.println("ファイル名を指定してください。");
