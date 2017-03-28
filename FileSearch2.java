@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class FileSearch2 {
 			System.exit(1);
 		}
 
-		List<String> fileNames = createFileNamesList(args);
+		String[] fileNames = Arrays.copyOfRange(args, 1, args.length);
 		try {
 			Map<String, Map<Integer, List<Integer>>> result = searchInAllFiles(args[0], fileNames);
 			if (result.isEmpty()) {
@@ -31,20 +32,6 @@ public class FileSearch2 {
 	}
 
 	/**
-	 * コマンドライン引数を引数で渡すと第二引数以降のリストを返します。
-	 * 
-	 * @param commandLineArgs
-	 * @return fileNames
-	 */
-	private static List<String> createFileNamesList(String[] commandLineArgs) {
-		List<String> fileNames = new ArrayList<String>();
-		for (int i = 0; i < commandLineArgs.length; i++) {
-			fileNames.add(commandLineArgs[i]);
-		}
-		return fileNames;
-	}
-
-	/**
 	 * 第二引数のリストの中の全てのファイルから検索を行います。
 	 * 
 	 * @param query
@@ -54,7 +41,7 @@ public class FileSearch2 {
 	 * @return 検索結果のマップ。 キー：ファイル名、値：行番号と文字の位置のマップ
 	 * @throws IOException
 	 */
-	private static Map<String, Map<Integer, List<Integer>>> searchInAllFiles(String query, List<String> fileNames)
+	private static Map<String, Map<Integer, List<Integer>>> searchInAllFiles(String query, String[] fileNames)
 			throws IOException {
 		Map<String, Map<Integer, List<Integer>>> result = new LinkedHashMap<String, Map<Integer, List<Integer>>>();
 		for (String fileName : fileNames) {
