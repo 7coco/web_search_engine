@@ -113,11 +113,11 @@ public class FileSearch2 {
 	}
 
 	/**
-	 * 引数のマップから最終的に出力する文字列を作ってそれを返します。
+	 * 引数のマップから出力に使用する文字列を作ってそれを返します。
 	 * 
-	 * @param resultMap
-	 *            検索結果のマップ
-	 * @return 出力するべき文字列
+	 * @param lineAndCharNumberMap
+	 *            行番号と文字数のマップ
+	 * @return 出力に使用する文字列
 	 */
 	private static String createStrBy(Map<Integer, List<Integer>> lineAndCharNumberMap) {
 		StringBuilder str = new StringBuilder();
