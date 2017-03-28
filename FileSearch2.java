@@ -54,7 +54,7 @@ public class FileSearch2 {
 	 *            検索文字列
 	 * @param fileNames
 	 *            検索対象ファイル名のリスト
-	 * @return 検索結果のマップ
+	 * @return 検索結果のマップ。 キー：ファイル名、値：行番号と文字の位置のマップ
 	 * @throws IOException
 	 */
 	private static Map<String, Map<Integer, List<Integer>>> searchInAllFiles(String query, List<String> fileNames)
