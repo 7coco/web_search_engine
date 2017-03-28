@@ -100,6 +100,18 @@ public class FileSearch2 {
 		}
 	}
 
+	private static String createOutputStr(Map<String, Map<Integer, List<Integer>>> searchResultMap) {
+		StringBuilder output = new StringBuilder();
+		for (Map.Entry<String, Map<Integer, List<Integer>>> entry : searchResultMap.entrySet()) {
+			String fileName = entry.getKey();
+			Map<Integer, List<Integer>> searchedByFileMap = entry.getValue();
+			output.append(fileName).append('の');
+			String searchedByFileStr = createStrBy(searchedByFileMap);
+			output.append(searchedByFileStr);
+		}
+		return output.toString();
+	}
+
 	/**
 	 * 引数のマップから最終的に出力する文字列を作ってそれを返します。
 	 * 
