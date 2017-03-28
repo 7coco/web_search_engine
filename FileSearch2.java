@@ -16,7 +16,7 @@ public class FileSearch2 {
 
 		List<String> fileNames = createFileNamesList(args);
 		try {
-			Map<String, Map<Integer, List<Integer>>> result = search(args[0], fileNames);
+			Map<Integer, List<Integer>> result = search(args[0], args[1]);
 			if (result.isEmpty()) {
 				System.out.println("該当する行はありませんでした。");
 			} else {
@@ -57,34 +57,26 @@ public class FileSearch2 {
 	 * @return 検索結果。キー：行数、値：文字の位置リスト
 	 * @throws IOException
 	 */
-	private static Map<String, Map<Integer, List<Integer>>> search(String query, List<String> fileNames)
-			throws IOException {
-		Map<String, Map<Integer, List<Integer>>> result = new LinkedHashMap<String, Map<Integer, List<Integer>>>();
-		for (String fileName : fileNames) {
-			try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-				Map<Integer, List<Integer>> lineAndCharNumbers = new LinkedHashMap<Integer, List<Integer>>();
-				String str;
-				int lineNumber = 1;
-				while ((str = br.readLine()) != null) {
-					if (str.indexOf(query) == -1) {
-						lineNumber++;
-						continue;
-					}
-					List<Integer> charNumbers = new ArrayList<Integer>();
-					int charNumber = 0;
-					while ((charNumber = str.indexOf(query, charNumber)) != -1) {
-						charNumber++;
-						charNumbers.add(charNumber);
-					}
-					lineAndCharNumbers.put(lineNumber, charNumbers);
-					lineNumber++;
+	private static Map<Integer, List<Integer>> search(String query, String fileName) throws IOException {
+		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+			Map<Integer, List<Integer>> result = new LinkedHashMap<Integer, List<Integer>>();
+			String str;
+			int lineNumber = 1;
+			while ((str = br.readLine()) != null) {
+				if (str.indexOf(query) == -1) {
+					continue;
 				}
-				if (!lineAndCharNumbers.isEmpty()) { // そのファイルの検索結果があれば
-					result.put(fileName, lineAndCharNumbers);
+				List<Integer> charNumbers = new ArrayList<Integer>();
+				int charNumber = 0;
+				while ((charNumber = str.indexOf(query, charNumber)) != -1) {
+					charNumber++;
+					charNumbers.add(charNumber);
 				}
+				result.put(lineNumber, charNumbers);
+				lineNumber++;
 			}
+			return result;
 		}
-		return result;
 	}
 
 	/**
@@ -94,21 +86,16 @@ public class FileSearch2 {
 	 *            検索結果のマップ
 	 * @return 出力するべき文字列
 	 */
-	private static String createOutputStr(Map<String, Map<Integer, List<Integer>>> resultMap) {
+	private static String createOutputStr(Map<Integer, List<Integer>> resultMap) {
 		StringBuilder answer = new StringBuilder();
-		for (Map.Entry<String, Map<Integer, List<Integer>>> entry : resultMap.entrySet()) {
-			String fileName = entry.getKey();
-			answer.append(fileName).append('の');
-			Map<Integer, List<Integer>> lineAndCharNumbers = entry.getValue();
-			for (Map.Entry<Integer, List<Integer>> etr : lineAndCharNumbers.entrySet()) {
-				int line = etr.getKey();
-				List<Integer> chars = etr.getValue();
-				answer.append(line).append("行目 ");
-				for (Integer c : chars) {
-					answer.append(c).append("文字目 ");
-				}
-				answer.append("\n");
+		for (Map.Entry<Integer, List<Integer>> entry : resultMap.entrySet()) {
+			int line = entry.getKey();
+			List<Integer> chars = entry.getValue();
+			answer.append(line).append("行目 ");
+			for (Integer c : chars) {
+				answer.append(c).append("文字目 ");
 			}
+			answer.append("\n");
 		}
 		return answer.toString();
 	}
