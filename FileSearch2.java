@@ -47,10 +47,20 @@ public class FileSearch2 {
 		return fileNames;
 	}
 
-	private static Map<String, Map<Integer, List<Integer>>> searchInAllFiles(String query, List<String> args)
+	/**
+	 * 第二引数のリストの中の全てのファイルから検索を行います。
+	 * 
+	 * @param query
+	 *            検索文字列
+	 * @param fileNames
+	 *            検索対象ファイル名のリスト
+	 * @return 検索結果のマップ
+	 * @throws IOException
+	 */
+	private static Map<String, Map<Integer, List<Integer>>> searchInAllFiles(String query, List<String> fileNames)
 			throws IOException {
 		Map<String, Map<Integer, List<Integer>>> result = new LinkedHashMap<String, Map<Integer, List<Integer>>>();
-		for (String fileName : args) {
+		for (String fileName : fileNames) {
 			Map<Integer, List<Integer>> resultInFile = searchInFile(query, fileName);
 			result.put(fileName, resultInFile);
 		}
