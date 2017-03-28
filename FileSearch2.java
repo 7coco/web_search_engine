@@ -16,7 +16,7 @@ public class FileSearch2 {
 
 		List<String> fileNames = createFileNamesList(args);
 		try {
-			Map<Integer, List<Integer>> result = search(args[0], args[1]);
+			Map<String, Map<Integer, List<Integer>>> result = searchInAllFiles(args[0], fileNames);
 			if (result.isEmpty()) {
 				System.out.println("該当する行はありませんでした。");
 			} else {
@@ -45,6 +45,16 @@ public class FileSearch2 {
 			fileNames.add(commandLineArgs[i]);
 		}
 		return fileNames;
+	}
+
+	private static Map<String, Map<Integer, List<Integer>>> searchInAllFiles(String query, List<String> args)
+			throws IOException {
+		Map<String, Map<Integer, List<Integer>>> result = new LinkedHashMap<String, Map<Integer, List<Integer>>>();
+		for (String fileName : args) {
+			Map<Integer, List<Integer>> resultInFile = searchInFile(query, fileName);
+			result.put(fileName, resultInFile);
+		}
+		return result;
 	}
 
 	/**
