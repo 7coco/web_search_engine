@@ -9,12 +9,8 @@ import java.util.Map;
 public class FileSearcher {
 	private String fileName;
 
-	public FileSearcher() {
-		System.out.println("ファイル名を指定してください。");
-	}
-
-	public FileSearcher(String f) {
-		fileName = f;
+	public FileSearcher(String fileName) {
+		this.fileName = fileName;
 	}
 
 	/**
