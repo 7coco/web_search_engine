@@ -13,13 +13,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LinkSearcher2 {
-	private URL url;
-	private List<String> refferencedLinks;
+	private URI uri;
+	// ListではなくSetを使い、StringではなくURLを保持するようにしよう。
+	private Set<URL> refferencedLinks;
 	static private final Pattern LINK_REGEXP = Pattern.compile("<a href=\"([^\"]*)\"|src=\"([^\"]*)");
 
-	public LinkSearcher2(String url) throws MalformedURLException {
-		this.refferencedLinks = new ArrayList<String>();
-		this.url = new URL(url);
+	public LinkSearcher2(String uri) throws MalformedURLException, URISyntaxException {
+		this.refferencedLinks = new HashSet<URL>();
+		this.uri = new URI(uri);
 	}
 
 	public List<String> search() throws IOException {
