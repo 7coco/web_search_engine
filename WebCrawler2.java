@@ -8,7 +8,7 @@ public class WebCrawler2 {
 			System.exit(1);
 		}
 		try {
-			LinkSearcher ls = new LinkSearcher(args[0]);
+			LinkSearcher2 ls = new LinkSearcher2(args[0]);
 			List<String> links = ls.search();
 			System.out.print(ls.createOutputStr(links));
 		} catch (IOException e) {

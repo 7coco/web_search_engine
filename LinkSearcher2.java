@@ -29,6 +29,34 @@ public class LinkSearcher2 {
 					result.add(link);
 				}
 			}
+			return searchAllReferenceableLinks(result);
+		}
+	}
+
+	private List<String> searchAllReferenceableLinks(List<String> links) throws IOException {
+		links.removeAll(refferencedLinks);
+		if (links.isEmpty()) {
+			return links;
+		} else {
+			List<String> result = new ArrayList<String>();
+			for (String link : links) {
+				refferencedLinks.add(link);
+				URL url = new URL(this.url + "/" + link);
+				try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
+					System.out.println(link);
+					String str;
+					while ((str = br.readLine()) != null) {
+						Matcher m = LINK_REGEXP.matcher(str);
+						if (m.find()) {
+							String l = (m.group(1) != null) ? m.group(1) : m.group(2);
+							result.add(l);
+						}
+					}
+				} catch (IOException e) {
+					continue;
+				}
+			}
+			result.addAll(searchAllReferenceableLinks(result));
 			return result;
 		}
 	}
