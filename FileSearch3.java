@@ -12,10 +12,10 @@ public class FileSearch3 {
 			System.exit(1);
 		}
 		String[] fileNames = Arrays.copyOfRange(args, 1, args.length);
+		Pattern regxp = Pattern.compile(args[0]);
 		for (String fileName : fileNames) {
 			try {
 				FileSearcher3 fs = new FileSearcher3(fileName);
-				Pattern regxp = Pattern.compile(args[0]);
 				Map<Integer, List<Integer>> result = fs.search(regxp);
 				System.out.println("ファイル名：" + fileName);
 				if (result.isEmpty()) {
