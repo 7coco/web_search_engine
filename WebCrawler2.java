@@ -12,10 +12,14 @@ public class WebCrawler2 {
 		}
 		try {
 			LinkSearcher2 ls = new LinkSearcher2(args[0]);
-			List<String> links = ls.search();
+			List<String> initializeList = new ArrayList<>(Arrays.asList(""));
+			List<String> links = ls.searchAllReferenceableLinks(initializeList);
 			System.out.print(ls.createOutputStr(links));
 		} catch (IOException e) {
 			System.out.println("入出力エラーです。");
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

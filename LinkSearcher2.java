@@ -32,16 +32,18 @@ public class LinkSearcher2 {
 	 * m.group(2); result.add(link); } } return
 	 * searchAllReferenceableLinks(result); } }
 	 */
+	public List<String> searchAllReferenceableLinks(List<String> links) throws IOException {
 		links.removeAll(refferencedLinks);
 		if (links.isEmpty()) {
 			return links;
 		} else {
 			List<String> result = new ArrayList<String>();
 			for (String link : links) {
-				refferencedLinks.add(link);
-				URL url = new URL(this.url + "/" + link);
+				// URI の resolve method を使ってちゃんとURL を作る。
+				URL url = this.uri.resolve(link).toURL();
+				refferencedLinks.add(url);
 				try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
-					System.out.println(link);
+					System.out.println(url);
 					String str;
 					while ((str = br.readLine()) != null) {
 						Matcher m = LINK_REGEXP.matcher(str);
