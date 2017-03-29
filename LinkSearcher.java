@@ -17,14 +17,19 @@ public class LinkSearcher {
 		this.url = new URL(url);
 	}
 
-	public String search(URL url, Pattern regexp) throws IOException {
-		InputStream is = url.openStream();
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+	public List<String> search() throws IOException {
+		try (InputStream is = url.openStream(); BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+			List<String> result = new ArrayList<String>();
 			String str;
+			Matcher m;
 			while ((str = br.readLine()) != null) {
-				// ここでsearch を行う。
+				m = LINK_REGEXP.matcher(str);
+				if (m.find()) {
+					String link = (m.group(1) != null) ? m.group(1) : m.group(2);
+					result.add(link);
+				}
 			}
+			return result;
 		}
-
 	}
 }
