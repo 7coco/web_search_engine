@@ -20,9 +20,8 @@ public class LinkSearcher {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
 			List<String> result = new ArrayList<String>();
 			String str;
-			Matcher m;
 			while ((str = br.readLine()) != null) {
-				m = LINK_REGEXP.matcher(str);
+				Matcher m = LINK_REGEXP.matcher(str);
 				if (m.find()) {
 					String link = (m.group(1) != null) ? m.group(1) : m.group(2);
 					result.add(link);
