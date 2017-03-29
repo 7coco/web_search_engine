@@ -23,22 +23,15 @@ public class LinkSearcher2 {
 		this.uri = new URI(uri);
 	}
 
-	public List<String> search() throws IOException {
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
-			List<String> result = new ArrayList<String>();
-			String str;
-			while ((str = br.readLine()) != null) {
-				Matcher m = LINK_REGEXP.matcher(str);
-				if (m.find()) {
-					String link = (m.group(1) != null) ? m.group(1) : m.group(2);
-					result.add(link);
-				}
-			}
-			return searchAllReferenceableLinks(result);
-		}
-	}
-
-	private List<String> searchAllReferenceableLinks(List<String> links) throws IOException {
+	/*
+	 * public List<String> search() throws IOException { try (BufferedReader br
+	 * = new BufferedReader(new InputStreamReader(uri.openStream()))) {
+	 * List<String> result = new ArrayList<String>(); String str; while ((str =
+	 * br.readLine()) != null) { Matcher m = LINK_REGEXP.matcher(str); if
+	 * (m.find()) { String link = (m.group(1) != null) ? m.group(1) :
+	 * m.group(2); result.add(link); } } return
+	 * searchAllReferenceableLinks(result); } }
+	 */
 		links.removeAll(refferencedLinks);
 		if (links.isEmpty()) {
 			return links;
