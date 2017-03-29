@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class LinkSearcher {
 	private URL url;
-	static private Pattern LINK_REGEXP = Pattern.compile("<a href=\"([^\"]*)\"|src=\"([^\"]*)");
+	static private final Pattern LINK_REGEXP = Pattern.compile("<a href=\"([^\"]*)\"|src=\"([^\"]*)");
 
 	public LinkSearcher(String url) throws MalformedURLException {
 		this.url = new URL(url);
