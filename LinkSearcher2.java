@@ -10,9 +10,11 @@ import java.util.regex.Pattern;
 
 public class LinkSearcher2 {
 	private URL url;
+	private List<String> refferencedLinks;
 	static private final Pattern LINK_REGEXP = Pattern.compile("<a href=\"([^\"]*)\"|src=\"([^\"]*)");
 
 	public LinkSearcher2(String url) throws MalformedURLException {
+		this.refferencedLinks = new ArrayList<String>();
 		this.url = new URL(url);
 	}
 
