@@ -32,4 +32,12 @@ public class LinkSearcher {
 			return result;
 		}
 	}
+
+	public String createOutputStr(List<String> searchedLinks) {
+		StringBuilder outputStr = new StringBuilder();
+		for (String link : searchedLinks) {
+			outputStr.append(link).append("\n");
+		}
+		return outputStr.toString();
+	}
 }
