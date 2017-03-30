@@ -88,16 +88,24 @@ public class LinkSearcher2 {
 		}
 	}
 
+	public List<URL> makeLinksToURL(List<String> links) throws MalformedURLException {
+		List<URL> urls = new ArrayList<URL>();
+		for (String link : links) {
+			urls.add(this.uri.resolve(link).toURL());
+		}
+		return urls;
+	}
+
 	/**
 	 * 引数の検索結果リストから最終的に出力するべき文字列を作ってそれを返します。
 	 * 
 	 * @param 検索結果のリスト
 	 * @return 出力するべき文字列
 	 */
-	public String createOutputStr(List<String> searchedLinks) {
+	public String createOutputStr(List<URL> searchedUrls) {
 		StringBuilder outputStr = new StringBuilder();
-		for (String link : searchedLinks) {
-			outputStr.append(link).append("\n");
+		for (URL url : searchedUrls) {
+			outputStr.append(url).append("\n");
 		}
 		System.out.println("終わり！");
 		return outputStr.toString();
