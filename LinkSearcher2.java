@@ -78,6 +78,12 @@ public class LinkSearcher2 {
 		return result;
 	}
 
+	/**
+	 * 引数の検索結果リストから最終的に出力するべき文字列を作ってそれを返します。
+	 * 
+	 * @param 検索結果のリスト
+	 * @return 出力するべき文字列
+	 */
 	public String createOutputStr(List<String> searchedLinks) {
 		StringBuilder outputStr = new StringBuilder();
 		for (String link : searchedLinks) {
