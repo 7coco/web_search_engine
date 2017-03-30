@@ -35,18 +35,22 @@ public class LinkSearcher2 {
 	 */
 	public List<String> searchAllReferenceableLinks(List<String> links) throws IOException {
 		if (links.isEmpty()) {
+			System.out.println("終わりでは！");
 			return links;
 		}
 		int duplicateOrUnreferenceableCount = 0;
+		System.out.println("今回のループはこんな感じ。" + links);
 		List<String> result = new ArrayList<String>();
 		for (String link : links) {
 			if (UNREFERENCEABLE_LINK_REGEXP.matcher(link).find()) {
 				duplicateOrUnreferenceableCount++;
+				System.out.println("これダメだー。" + link);
 				continue;
 			} else {
 				URL url = this.uri.resolve(link).toURL();
 				if (referencedLinks.contains(url)) {
 					duplicateOrUnreferenceableCount++;
+					System.out.println("かぶった！" + duplicateOrUnreferenceableCount);
 					if (duplicateOrUnreferenceableCount == links.size()) {
 						System.out.println("終わりでは！");
 						return links;
@@ -58,6 +62,7 @@ public class LinkSearcher2 {
 					System.out.println(url);
 					String str;
 					while ((str = br.readLine()) != null) {
+						System.out.println("ファイル内検索中");
 						Matcher m = LINK_REGEXP.matcher(str);
 						if (m.find()) {
 							String l = (m.group(1) != null) ? m.group(1) : m.group(2);
@@ -78,6 +83,7 @@ public class LinkSearcher2 {
 		for (String link : searchedLinks) {
 			outputStr.append(link).append("\n");
 		}
+		System.out.println("終わり！");
 		return outputStr.toString();
 	}
 }
