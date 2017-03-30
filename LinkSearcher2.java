@@ -15,11 +15,11 @@ import java.util.regex.Pattern;
 public class LinkSearcher2 {
 	private URI uri;
 	// ListではなくSetを使い、StringではなくURLを保持するようにしよう。
-	private Set<URL> refferencedLinks;
+	private Set<URL> referencedLinks;
 	static private final Pattern LINK_REGEXP = Pattern.compile("<a href=\"([^\"]*)\"|src=\"([^\"]*)");
 
 	public LinkSearcher2(String uri) throws MalformedURLException, URISyntaxException {
-		this.refferencedLinks = new HashSet<URL>();
+		this.referencedLinks = new HashSet<URL>();
 		this.uri = new URI(uri);
 	}
 
