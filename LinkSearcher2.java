@@ -46,17 +46,15 @@ public class LinkSearcher2 {
 				duplicateOrUnreferenceableCount++;
 				System.out.println("これダメだー。" + link);
 				continue;
+			} else if (referencedLinks.contains(this.uri.resolve(link).toURL())) {
+				duplicateOrUnreferenceableCount++;
+				System.out.println("かぶった！" + duplicateOrUnreferenceableCount);
+				continue; // 重複を弾く。
+			} else if (duplicateOrUnreferenceableCount == links.size()) {
+				System.out.println("終わりでは！");
+				return links;
 			} else {
 				URL url = this.uri.resolve(link).toURL();
-				if (referencedLinks.contains(url)) {
-					duplicateOrUnreferenceableCount++;
-					System.out.println("かぶった！" + duplicateOrUnreferenceableCount);
-					if (duplicateOrUnreferenceableCount == links.size()) {
-						System.out.println("終わりでは！");
-						return links;
-					}
-					continue; // 重複を弾く。
-				}
 				referencedLinks.add(url);
 				try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
 					System.out.println(url);
