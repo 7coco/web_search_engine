@@ -32,10 +32,11 @@ public class LinkSearcher2 {
 	 *            から一番最初に呼び出すときは空文字をリストの中に入れてください。
 	 * @return ファイルの中から見つかったリンクのリスト
 	 * @throws IOException
+	 * @throws URISyntaxException
 	 */
-	public List<String> searchAllReferenceableLinks(List<String> links) throws IOException {
+	public List<String> searchAllReferenceableLinks(List<String> links) throws IOException, URISyntaxException {
 		if (links.isEmpty()) {
-			System.out.println("終わりでは！");
+			System.out.println("終わりでは！リンクがない！");
 			return links;
 		}
 		int duplicateOrUnreferenceableCount = 0;
@@ -51,10 +52,13 @@ public class LinkSearcher2 {
 				System.out.println("かぶった！" + duplicateOrUnreferenceableCount);
 				continue; // 重複を弾く。
 			} else if (duplicateOrUnreferenceableCount == links.size()) {
-				System.out.println("終わりでは！");
+				System.out.println("終わりでは！全部ダメだった！");
 				return links;
 			} else {
 				URL url = this.uri.resolve(link).toURL();
+				if (!url.toURI().resolve(link).toString().startsWith(url.toString())) {
+					continue;
+				}
 				try {
 					result = searchIn(url);
 				} catch (IOException e) {
@@ -66,8 +70,8 @@ public class LinkSearcher2 {
 		return result;
 	}
 
-	private List<URL> searchIn(URL url) throws MalformedURLException, IOException {
-		List<URL> result = new ArrayList<URL>();
+	private List<String> searchIn(URL url) throws MalformedURLException, IOException {
+		List<String> result = new ArrayList<String>();
 		referencedLinks.add(url);
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
 			System.out.println(url);
@@ -77,8 +81,7 @@ public class LinkSearcher2 {
 				Matcher m = LINK_REGEXP.matcher(str);
 				if (m.find()) {
 					String l = (m.group(1) != null) ? m.group(1) : m.group(2);
-					URL u = new URL(l);
-					result.add(u);
+					result.add(l);
 				}
 			}
 			return result;
