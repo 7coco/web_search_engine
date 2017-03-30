@@ -24,6 +24,15 @@ public class LinkSearcher2 {
 		this.uri = new URI(uri);
 	}
 
+	/**
+	 * 指定したURLから参照することが可能なURLの一覧を再帰的に求めます。
+	 * 
+	 * @param links
+	 *            検索したファイルの中から見つかったリンクのリスト。 main
+	 *            から一番最初に呼び出すときは空文字をリストの中に入れてください。
+	 * @return ファイルの中から見つかったリンクのリスト
+	 * @throws IOException
+	 */
 	public List<String> searchAllReferenceableLinks(List<String> links) throws IOException {
 		if (links.isEmpty()) {
 			System.out.println("終わりでは！");
