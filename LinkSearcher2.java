@@ -17,6 +17,7 @@ public class LinkSearcher2 {
 	// ListではなくSetを使い、StringではなくURLを保持するようにしよう。
 	private Set<URL> referencedLinks;
 	static private final Pattern LINK_REGEXP = Pattern.compile("<a href=\"([^\"]*)\"|src=\"([^\"]*)");
+	static private final Pattern UNREFERENCEABLE_LINK_REGEXP = Pattern.compile("^https?://|[<>{}|\\[\\]]");
 
 	public LinkSearcher2(String uri) throws MalformedURLException, URISyntaxException {
 		this.referencedLinks = new HashSet<URL>();
