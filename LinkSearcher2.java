@@ -55,18 +55,8 @@ public class LinkSearcher2 {
 				return links;
 			} else {
 				URL url = this.uri.resolve(link).toURL();
-				referencedLinks.add(url);
-				try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
-					System.out.println(url);
-					String str;
-					while ((str = br.readLine()) != null) {
-						System.out.println("ファイル内検索中");
-						Matcher m = LINK_REGEXP.matcher(str);
-						if (m.find()) {
-							String l = (m.group(1) != null) ? m.group(1) : m.group(2);
-							result.add(l);
-						}
-					}
+				try {
+					result = searchIn(url);
 				} catch (IOException e) {
 					continue;
 				}
@@ -74,6 +64,25 @@ public class LinkSearcher2 {
 		}
 		result.addAll(searchAllReferenceableLinks(result));
 		return result;
+	}
+
+	private List<URL> searchIn(URL url) throws MalformedURLException, IOException {
+		List<URL> result = new ArrayList<URL>();
+		referencedLinks.add(url);
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
+			System.out.println(url);
+			String str;
+			while ((str = br.readLine()) != null) {
+				System.out.println("ファイル内検索中");
+				Matcher m = LINK_REGEXP.matcher(str);
+				if (m.find()) {
+					String l = (m.group(1) != null) ? m.group(1) : m.group(2);
+					URL u = new URL(l);
+					result.add(u);
+				}
+			}
+			return result;
+		}
 	}
 
 	/**
