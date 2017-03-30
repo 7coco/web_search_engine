@@ -34,15 +34,26 @@ public class LinkSearcher2 {
 	 * searchAllReferenceableLinks(result); } }
 	 */
 	public List<String> searchAllReferenceableLinks(List<String> links) throws IOException {
-		links.removeAll(refferencedLinks);
 		if (links.isEmpty()) {
 			return links;
-		} else {
-			List<String> result = new ArrayList<String>();
-			for (String link : links) {
-				// URI の resolve method を使ってちゃんとURL を作る。
+		}
+		int duplicateOrUnreferenceableCount = 0;
+		List<String> result = new ArrayList<String>();
+		for (String link : links) {
+			if (UNREFERENCEABLE_LINK_REGEXP.matcher(link).find()) {
+				duplicateOrUnreferenceableCount++;
+				continue;
+			} else {
 				URL url = this.uri.resolve(link).toURL();
-				refferencedLinks.add(url);
+				if (referencedLinks.contains(url)) {
+					duplicateOrUnreferenceableCount++;
+					if (duplicateOrUnreferenceableCount == links.size()) {
+						System.out.println("終わりでは！");
+						return links;
+					}
+					continue; // 重複を弾く。
+				}
+				referencedLinks.add(url);
 				try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
 					System.out.println(url);
 					String str;
@@ -57,9 +68,9 @@ public class LinkSearcher2 {
 					continue;
 				}
 			}
-			result.addAll(searchAllReferenceableLinks(result));
-			return result;
 		}
+		result.addAll(searchAllReferenceableLinks(result));
+		return result;
 	}
 
 	public String createOutputStr(List<String> searchedLinks) {
