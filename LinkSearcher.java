@@ -14,9 +14,11 @@ public class LinkSearcher {
 	static private final Pattern LINK_REGEXP = Pattern
 			.compile("<a href=\"([^\"]*html)\"|<frame[^<]src=\"([^\"]*\\.html?)");
 	static private final Pattern TARGET_URL_REGEXP = Pattern.compile("https?");
+	private Set<URL> referenceadUrls;
 
 	public LinkSearcher(String url) throws MalformedURLException {
 		this.url = new URL(url);
+		this.referenceadUrls = new HashSet<URL>();
 	}
 
 	public List<URL> search(URL url) throws IOException {
