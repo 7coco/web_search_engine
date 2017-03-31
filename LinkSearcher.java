@@ -33,7 +33,7 @@ public class LinkSearcher {
 						URL searchedUrl = this.url.toURI().resolve(link).toURL();
 						if (searchedUrl.toString().startsWith(this.url.toString())
 								&& TARGET_URL_REGEXP.matcher(this.url.toString()).find()) {
-							result.add(url);
+							searchedUrls.add(searchedUrl);
 						}
 					} catch (URISyntaxException e) {
 						continue;
