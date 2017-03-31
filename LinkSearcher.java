@@ -17,15 +17,21 @@ public class LinkSearcher {
 		this.url = new URL(url);
 	}
 
-	public List<String> search() throws IOException {
+	public List<URL> search() throws IOException {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
-			List<String> result = new ArrayList<String>();
+			List<URL> result = new ArrayList<URL>();
 			String str;
 			while ((str = br.readLine()) != null) {
 				Matcher m = LINK_REGEXP.matcher(str);
 				if (m.find()) {
 					String link = (m.group(1) != null) ? m.group(1) : m.group(2);
-					result.add(link);
+					URL url;
+					try {
+						url = this.url.toURI().resolve(link).toURL();
+						result.add(url);
+					} catch (URISyntaxException e) {
+						continue;
+					}
 				}
 			}
 			return result;
