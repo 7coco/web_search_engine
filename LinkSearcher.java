@@ -40,7 +40,10 @@ public class LinkSearcher {
 					}
 				}
 			}
-			return result;
+			searchedUrls = deleteDuplicates(searchedUrls);
+			referenceadUrls.addAll(searchedUrls);
+			searchedUrls = forSearch(searchedUrls);
+			return searchedUrls;
 		}
 	}
 
