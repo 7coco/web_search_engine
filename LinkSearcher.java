@@ -27,9 +27,8 @@ public class LinkSearcher {
 				Matcher m = LINK_REGEXP.matcher(str);
 				if (m.find()) {
 					String link = (m.group(1) != null) ? m.group(1) : m.group(2);
-					URL url;
 					try {
-						url = this.url.toURI().resolve(link).toURL();
+						URL url = url.toURI().resolve(link).toURL();
 						if (TARGET_URL_REGEXP.matcher(url.toString()).find()) {
 							result.add(url);
 						}
