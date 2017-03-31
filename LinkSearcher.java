@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class LinkSearcher {
 	private URL url;
 	static private final Pattern LINK_REGEXP = Pattern
-			.compile("<a href=\"([^\"]*html)\"|<frame[^<]src=\"([^\"]*\\.html?)");
+			.compile("<a href=\"([^\"]*html?)\"|<frame[^<]src=\"([^\"]*\\.html?)");
 	static private final Pattern TARGET_URL_REGEXP = Pattern.compile("https?");
 	private Set<URL> referenceadUrls;
 
