@@ -44,6 +44,11 @@ public class LinkSearcher {
 		}
 	}
 
+	private Set<URL> deleteDuplicates(Set<URL> urls) {
+		urls.removeAll(referenceadUrls);
+		return urls;
+	}
+
 	public String createOutputStr(Set<URL> searchedUrls) {
 		StringBuilder outputStr = new StringBuilder();
 		for (URL url : searchedUrls) {
