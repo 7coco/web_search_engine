@@ -28,8 +28,9 @@ public class LinkSearcher {
 				if (m.find()) {
 					String link = (m.group(1) != null) ? m.group(1) : m.group(2);
 					try {
-						URL url = url.toURI().resolve(link).toURL();
-						if (TARGET_URL_REGEXP.matcher(url.toString()).find()) {
+						URL url = this.url.toURI().resolve(link).toURL();
+						if (url.toString().startsWith(url.toString())
+								&& TARGET_URL_REGEXP.matcher(this.url.toString()).find()) {
 							result.add(url);
 						}
 					} catch (URISyntaxException e) {
