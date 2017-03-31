@@ -29,7 +29,9 @@ public class LinkSearcher {
 					URL url;
 					try {
 						url = this.url.toURI().resolve(link).toURL();
-						result.add(url);
+						if (TARGET_URL_REGEXP.matcher(url.toString()).find()) {
+							result.add(url);
+						}
 					} catch (URISyntaxException e) {
 						continue;
 					}
