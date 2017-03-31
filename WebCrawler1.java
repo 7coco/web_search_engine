@@ -1,6 +1,6 @@
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
+import java.util.Set;
 
 public class WebCrawler1 {
 	public static void main(String[] args) {
