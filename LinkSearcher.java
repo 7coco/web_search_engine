@@ -21,9 +21,9 @@ public class LinkSearcher {
 		this.referenceadUrls = new HashSet<URL>();
 	}
 
-	public List<URL> search(URL url) throws IOException {
+	public Set<URL> search(URL url) throws IOException {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
-			List<URL> result = new ArrayList<URL>();
+			Set<URL> searchedUrls = new HashSet<URL>();
 			String str;
 			while ((str = br.readLine()) != null) {
 				Matcher m = LINK_REGEXP.matcher(str);
