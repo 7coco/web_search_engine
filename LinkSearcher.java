@@ -19,7 +19,7 @@ public class LinkSearcher {
 		this.url = new URL(url);
 	}
 
-	public List<URL> search() throws IOException {
+	public List<URL> search(URL url) throws IOException {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
 			List<URL> result = new ArrayList<URL>();
 			String str;
@@ -28,8 +28,8 @@ public class LinkSearcher {
 				if (m.find()) {
 					String link = (m.group(1) != null) ? m.group(1) : m.group(2);
 					try {
-						URL url = this.url.toURI().resolve(link).toURL();
-						if (url.toString().startsWith(url.toString())
+						URL searchedUrl = this.url.toURI().resolve(link).toURL();
+						if (searchedUrl.toString().startsWith(this.url.toString())
 								&& TARGET_URL_REGEXP.matcher(this.url.toString()).find()) {
 							result.add(url);
 						}
