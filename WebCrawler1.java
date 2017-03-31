@@ -10,8 +10,8 @@ public class WebCrawler1 {
 		}
 		try {
 			LinkSearcher ls = new LinkSearcher(args[0]);
-			System.out.print(ls.createOutputStr(links));
 			List<URL> urls = ls.search();
+			System.out.print(ls.createOutputStr(urls));
 		} catch (IOException e) {
 			System.out.println("入出力エラーです。");
 			e.printStackTrace();

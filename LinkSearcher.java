@@ -38,10 +38,10 @@ public class LinkSearcher {
 		}
 	}
 
-	public String createOutputStr(List<String> searchedLinks) {
+	public String createOutputStr(List<URL> searchedUrls) {
 		StringBuilder outputStr = new StringBuilder();
-		for (String link : searchedLinks) {
-			outputStr.append(link).append("\n");
+		for (URL url : searchedUrls) {
+			outputStr.append(url).append("\n");
 		}
 		return outputStr.toString();
 	}
