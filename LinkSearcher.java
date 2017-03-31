@@ -49,6 +49,19 @@ public class LinkSearcher {
 		return urls;
 	}
 
+	private Set<URL> forSearch(Set<URL> urls) {
+		Set<URL> resultUrls = new HashSet<>();
+		for (URL url : urls) {
+			System.out.println(url);
+			try {
+				resultUrls.addAll(search(url));
+			} catch (IOException e) {
+				continue;
+			}
+		}
+		return resultUrls;
+	}
+
 	public String createOutputStr(Set<URL> searchedUrls) {
 		StringBuilder outputStr = new StringBuilder();
 		for (URL url : searchedUrls) {
