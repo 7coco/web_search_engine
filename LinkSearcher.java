@@ -44,7 +44,7 @@ public class LinkSearcher {
 		}
 	}
 
-	public String createOutputStr(List<URL> searchedUrls) {
+	public String createOutputStr(Set<URL> searchedUrls) {
 		StringBuilder outputStr = new StringBuilder();
 		for (URL url : searchedUrls) {
 			outputStr.append(url).append("\n");
