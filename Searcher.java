@@ -24,10 +24,24 @@ public class Searcher {
 	}
 
 	public Set<URL> search(URL url) throws IOException {
+		Set<URL> results = new HashSet<URL>();
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
+			String currentLine;
+			while ((currentLine = br.readLine()) != null) {
+				try {
+					searchUrls(currentLine);
+					if (isMatched(currentLine)) {
+						results.add(url);
+						break;
 					}
+				} catch (URISyntaxException e) {
+					continue;
 				}
 			}
+			return results;
+		}
+	}
+
 	private Set<URL> searchUrls(String currentLine) throws IOException, URISyntaxException {
 		Set<URL> searchedUrls = new HashSet<URL>();
 		Matcher m = LINK_REGEXP.matcher(currentLine);
