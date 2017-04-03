@@ -8,5 +8,16 @@ public class WebSearchEngine {
 			System.out.println("検索したい正規表現と検索対象のURLを入力してください");
 			System.exit(0);
 		}
+		try {
+			Searcher s = new Searcher(args[0], args[1]);
+			URL url = new URL(args[1]);
+			s.search(url);
+		} catch (MalformedURLException e) {
+			System.out.println("不正なURLです。");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("入出力エラーです。");
+			e.printStackTrace();
+		}
 	}
 }
