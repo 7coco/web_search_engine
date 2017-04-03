@@ -16,6 +16,7 @@ public class Searcher {
 	static private final Pattern LINK_REGEXP = Pattern
 			.compile("<a href=\"([^\"]*html?)\"|<frame[^<]src=\"([^\"]*\\.html?)");
 	static private final Pattern TARGET_URL_REGEXP = Pattern.compile("https?");
+	static private final Pattern EXCEPT_TAGS = Pattern.compile("<[^>]*>");
 	private Set<URL> referenceadUrls;
 
 	public Searcher(String regexp, String url) throws MalformedURLException {
@@ -61,9 +62,10 @@ public class Searcher {
 	}
 
 	private boolean isMatched(String currentLine) throws IOException {
-		Matcher m = regexp.matcher(currentLine);
+		String str = EXCEPT_TAGS.matcher(currentLine).replaceAll("");
+		Matcher m = regexp.matcher(str);
 		if (m.find()) {
-			System.out.println(currentLine);
+			System.out.println(str);
 			return true;
 		} else {
 			return false;
