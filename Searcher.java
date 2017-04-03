@@ -10,13 +10,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Searcher {
+	private Pattern regexp;
 	private URL url;
 	static private final Pattern LINK_REGEXP = Pattern
 			.compile("<a href=\"([^\"]*html?)\"|<frame[^<]src=\"([^\"]*\\.html?)");
 	static private final Pattern TARGET_URL_REGEXP = Pattern.compile("https?");
 	private Set<URL> referenceadUrls;
 
-	public Searcher(String url) throws MalformedURLException {
+	public Searcher(String regexp, String url) throws MalformedURLException {
+		this.regexp = Pattern.compile(regexp);
 		this.url = new URL(url);
 		this.referenceadUrls = new HashSet<URL>();
 	}
