@@ -1,5 +1,6 @@
 import java.io.IOException;
-import java.util.List;
+import java.net.URL;
+import java.util.Set;
 
 public class WebCrawler1 {
 	public static void main(String[] args) {
@@ -9,8 +10,9 @@ public class WebCrawler1 {
 		}
 		try {
 			LinkSearcher ls = new LinkSearcher(args[0]);
-			List<String> links = ls.search();
-			System.out.print(ls.createOutputStr(links));
+			URL url = new URL(args[0]);
+			Set<URL> urls = ls.search(url);
+			System.out.print(ls.createOutputStr(urls));
 		} catch (IOException e) {
 			System.out.println("入出力エラーです。");
 			e.printStackTrace();

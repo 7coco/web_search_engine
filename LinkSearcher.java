@@ -2,39 +2,73 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LinkSearcher {
 	private URL url;
-	static private final Pattern LINK_REGEXP = Pattern.compile("<a href=\"([^\"]*)\"|src=\"([^\"]*)");
+	static private final Pattern LINK_REGEXP = Pattern
+			.compile("<a href=\"([^\"]*html?)\"|<frame[^<]src=\"([^\"]*\\.html?)");
+	static private final Pattern TARGET_URL_REGEXP = Pattern.compile("https?");
+	private Set<URL> referenceadUrls;
 
 	public LinkSearcher(String url) throws MalformedURLException {
 		this.url = new URL(url);
+		this.referenceadUrls = new HashSet<URL>();
 	}
 
-	public List<String> search() throws IOException {
+	public Set<URL> search(URL url) throws IOException {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
-			List<String> result = new ArrayList<String>();
+			Set<URL> searchedUrls = new HashSet<URL>();
 			String str;
 			while ((str = br.readLine()) != null) {
 				Matcher m = LINK_REGEXP.matcher(str);
 				if (m.find()) {
 					String link = (m.group(1) != null) ? m.group(1) : m.group(2);
-					result.add(link);
+					try {
+						URL searchedUrl = this.url.toURI().resolve(link).toURL();
+						if (searchedUrl.toString().startsWith(this.url.toString())
+								&& TARGET_URL_REGEXP.matcher(this.url.toString()).find()) {
+							searchedUrls.add(searchedUrl);
+						}
+					} catch (URISyntaxException e) {
+						continue;
+					}
 				}
 			}
-			return result;
+			searchedUrls = deleteDuplicates(searchedUrls);
+			referenceadUrls.addAll(searchedUrls);
+			searchedUrls = forSearch(searchedUrls);
+			return searchedUrls;
 		}
 	}
 
-	public String createOutputStr(List<String> searchedLinks) {
+	private Set<URL> deleteDuplicates(Set<URL> urls) {
+		urls.removeAll(referenceadUrls);
+		return urls;
+	}
+
+	private Set<URL> forSearch(Set<URL> urls) {
+		Set<URL> resultUrls = new HashSet<>();
+		for (URL url : urls) {
+			System.out.println(url);
+			try {
+				resultUrls.addAll(search(url));
+			} catch (IOException e) {
+				continue;
+			}
+		}
+		return resultUrls;
+	}
+
+	public String createOutputStr(Set<URL> searchedUrls) {
 		StringBuilder outputStr = new StringBuilder();
-		for (String link : searchedLinks) {
-			outputStr.append(link).append("\n");
+		for (URL url : searchedUrls) {
+			outputStr.append(url).append("\n");
 		}
 		return outputStr.toString();
 	}
