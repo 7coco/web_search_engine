@@ -45,6 +45,13 @@ public class Searcher {
 		return searchedUrls;
 	}
 
+	private boolean isMatched(String currentLine) throws IOException {
+		Matcher m = regexp.matcher(currentLine);
+		if (m.find()) {
+			System.out.println(currentLine);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
