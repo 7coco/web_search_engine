@@ -77,7 +77,6 @@ public class Searcher {
 	private Set<URL> forSearch(Set<URL> urls) {
 		Set<URL> resultUrls = new HashSet<>();
 		for (URL url : urls) {
-			System.out.println(url);
 			try {
 				resultUrls.addAll(search(url));
 			} catch (IOException e) {
