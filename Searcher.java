@@ -25,27 +25,26 @@ public class Searcher {
 
 	public Set<URL> search(URL url) throws IOException {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
-			Set<URL> searchedUrls = new HashSet<URL>();
-			String str;
-			while ((str = br.readLine()) != null) {
-				Matcher m = LINK_REGEXP.matcher(str);
-				if (m.find()) {
-					String link = (m.group(1) != null) ? m.group(1) : m.group(2);
-					try {
-						URL searchedUrl = this.url.toURI().resolve(link).toURL();
-						if (searchedUrl.toString().startsWith(this.url.toString())
-								&& TARGET_URL_REGEXP.matcher(this.url.toString()).find()) {
-							searchedUrls.add(searchedUrl);
-						}
-					} catch (URISyntaxException e) {
-						continue;
 					}
 				}
 			}
-			searchedUrls = deleteDuplicates(searchedUrls);
-			referenceadUrls.addAll(searchedUrls);
-			searchedUrls = forSearch(searchedUrls);
-			return searchedUrls;
+	private Set<URL> searchUrls(String currentLine) throws IOException, URISyntaxException {
+		Set<URL> searchedUrls = new HashSet<URL>();
+		Matcher m = LINK_REGEXP.matcher(currentLine);
+		if (m.find()) {
+			String link = (m.group(1) != null) ? m.group(1) : m.group(2);
+			URL searchedUrl = this.url.toURI().resolve(link).toURL();
+			if (searchedUrl.toString().startsWith(this.url.toString())
+					&& TARGET_URL_REGEXP.matcher(this.url.toString()).find()) {
+				searchedUrls.add(searchedUrl);
+			}
+		}
+		searchedUrls = deleteDuplicates(searchedUrls);
+		referenceadUrls.addAll(searchedUrls);
+		searchedUrls = forSearch(searchedUrls);
+		return searchedUrls;
+	}
+
 		}
 	}
 
