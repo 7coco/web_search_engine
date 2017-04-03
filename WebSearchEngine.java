@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class WebSearchEngine {
 	public static void main(String[] args) {
 		if (args.length != 2) {
