@@ -34,7 +34,6 @@ public class Searcher {
 					searchUrls(currentLine);
 					if (isMatched(currentLine)) {
 						results.add(url);
-						break;
 					}
 				} catch (URISyntaxException e) {
 					continue;
