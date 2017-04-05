@@ -26,7 +26,7 @@ public class Searcher {
 		this.referenceadUrls = new HashSet<URL>();
 	}
 
-	public Set<URL> search(URL url) throws IOException {
+	public void search(URL url) throws IOException {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
 			String currentLine;
 			while ((currentLine = br.readLine()) != null) {
@@ -39,7 +39,6 @@ public class Searcher {
 					continue;
 				}
 			}
-			return results;
 		}
 	}
 
