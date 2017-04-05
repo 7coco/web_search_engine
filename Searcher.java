@@ -83,9 +83,9 @@ public class Searcher {
 		}
 	}
 
-	public String createOutputStr(Set<URL> searchedUrls) {
+	public String createOutputStr() {
 		StringBuilder outputStr = new StringBuilder();
-		for (URL url : searchedUrls) {
+		for (URL url : results) {
 			outputStr.append(url).append("\n");
 		}
 		return outputStr.toString();
