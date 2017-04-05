@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Set;
 
 public class WebSearchEngine {
 	public static void main(String[] args) {
@@ -12,8 +11,8 @@ public class WebSearchEngine {
 		try {
 			Searcher s = new Searcher(args[0], args[1]);
 			URL url = new URL(args[1]);
-			Set<URL> urls = s.search(url);
-			System.out.print(s.createOutputStr(urls));
+			s.search(url);
+			System.out.print(s.createOutputStr());
 		} catch (MalformedURLException e) {
 			System.out.println("不正なURLです。");
 			e.printStackTrace();
