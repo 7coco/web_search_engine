@@ -43,7 +43,7 @@ public class Searcher {
 		}
 	}
 
-	private Set<URL> searchUrls(String currentLine) throws IOException, URISyntaxException {
+	private void searchUrls(String currentLine) throws IOException, URISyntaxException {
 		Set<URL> searchedUrls = new HashSet<URL>();
 		Matcher m = LINK_REGEXP.matcher(currentLine);
 		if (m.find()) {
@@ -55,8 +55,7 @@ public class Searcher {
 		}
 		searchedUrls = deleteDuplicates(searchedUrls);
 		referenceadUrls.addAll(searchedUrls);
-		searchedUrls = forSearch(searchedUrls);
-		return searchedUrls;
+		forSearch(searchedUrls);
 	}
 
 	private boolean isMatched(String currentLine) throws IOException {
