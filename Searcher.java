@@ -57,6 +57,16 @@ public class Searcher {
 		forSearch(searchedUrls);
 	}
 
+	private void forSearch(Set<URL> urls) {
+		for (URL url : urls) {
+			try {
+				search(url);
+			} catch (IOException e) {
+				continue;
+			}
+		}
+	}
+
 	private boolean isMatched(String currentLine) throws IOException {
 		String str = EXCEPT_TAGS.matcher(currentLine).replaceAll("");
 		Matcher m = regexp.matcher(str);
@@ -71,16 +81,6 @@ public class Searcher {
 	private Set<URL> deleteDuplicates(Set<URL> urls) {
 		urls.removeAll(referenceadUrls);
 		return urls;
-	}
-
-	private void forSearch(Set<URL> urls) {
-		for (URL url : urls) {
-			try {
-				search(url);
-			} catch (IOException e) {
-				continue;
-			}
-		}
 	}
 
 	public String createOutputStr() {
