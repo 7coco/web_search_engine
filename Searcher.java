@@ -74,16 +74,14 @@ public class Searcher {
 		return urls;
 	}
 
-	private Set<URL> forSearch(Set<URL> urls) {
-		Set<URL> resultUrls = new HashSet<>();
+	private void forSearch(Set<URL> urls) {
 		for (URL url : urls) {
 			try {
-				resultUrls.addAll(search(url));
+				search(url);
 			} catch (IOException e) {
 				continue;
 			}
 		}
-		return resultUrls;
 	}
 
 	public String createOutputStr(Set<URL> searchedUrls) {
