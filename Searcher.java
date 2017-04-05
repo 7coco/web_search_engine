@@ -48,9 +48,8 @@ public class Searcher {
 		Matcher m = LINK_REGEXP.matcher(currentLine);
 		if (m.find()) {
 			String link = (m.group(1) != null) ? m.group(1) : m.group(2);
-			URL searchedUrl = this.url.toURI().resolve(link).toURL();
-			if (searchedUrl.toString().startsWith(this.url.toString())
-					&& TARGET_URL_REGEXP.matcher(this.url.toString()).find()) {
+			URL searchedUrl = url.toURI().resolve(link).toURL();
+			if (searchedUrl.toString().startsWith(url.toString()) && TARGET_URL_REGEXP.matcher(url.toString()).find()) {
 				searchedUrls.add(searchedUrl);
 			}
 		}
