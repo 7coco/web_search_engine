@@ -29,6 +29,8 @@ public class Searcher {
 	public void startSearch() throws IOException {
 		search(url);
 	}
+
+	private void search(URL url) throws IOException {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
 			String currentLine;
 			while ((currentLine = br.readLine()) != null) {
